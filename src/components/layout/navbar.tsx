@@ -62,8 +62,8 @@ const Navbar = ({
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "Blog",
-      url: "blog",
+      title: "Blogs",
+      url: "/blogs",
     },
     {
       title: "About",

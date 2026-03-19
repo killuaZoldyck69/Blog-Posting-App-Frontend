@@ -47,3 +47,15 @@ export const blogService = async (
     return { data: null, error: { message: "Something went wrong" } };
   }
 };
+
+export const getBlogById = async (postId: string) => {
+  try {
+    const res = await fetch(`${API_URL}/posts/${postId}`);
+
+    const data = await res.json();
+
+    return { data: data, error: null };
+  } catch (error) {
+    return { data: null, error: { message: "Something went wrong" } };
+  }
+};

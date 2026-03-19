@@ -13,7 +13,7 @@ import Link from "next/link";
 
 export default function BlogCard({ post }: { post: BlogPost }) {
   return (
-    <Card className="h-full w-3xl overflow-hidden border-none shadow-md transition-all duration-300 pb-2">
+    <Card className="overflow-hidden border-none shadow-md transition-all duration-300 pb-2">
       <div className="relative h-56 w-full overflow-hidden">
         {post.thumbnail ? (
           <Image

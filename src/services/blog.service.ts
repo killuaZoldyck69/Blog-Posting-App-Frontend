@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { cookies } from "next/headers";
 
 const API_URL = env.API_URL;
 
@@ -15,7 +16,6 @@ export interface BlogSearchParams {
 }
 
 export interface BlogData {
-  id: string;
   title: string;
   content: string;
   tag?: string[];
@@ -66,5 +66,33 @@ export const getBlogById = async (postId: string) => {
     return { data: data, error: null };
   } catch (error) {
     return { data: null, error: { message: "Something went wrong" } };
+  }
+};
+
+export const createBlogPost = async (blogData: BlogData) => {
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(`${API_URL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: cookieStore.toString(),
+      },
+      body: JSON.stringify(blogData),
+    });
+
+    const data = await res.json();
+
+    if (data.error) {
+      return {
+        data: null,
+        error: { message: "Error: Post not created." },
+      };
+    }
+
+    return { data: data, error: null };
+  } catch (err) {
+    return { data: null, error: { message: "Something Went Wrong" } };
   }
 };

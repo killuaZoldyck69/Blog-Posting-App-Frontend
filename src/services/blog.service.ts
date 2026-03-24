@@ -14,6 +14,13 @@ export interface BlogSearchParams {
   tags?: string;
 }
 
+export interface BlogData {
+  id: string;
+  title: string;
+  content: string;
+  tag?: string[];
+}
+
 export const blogService = async (
   params?: BlogSearchParams,
   options?: ServiceOptions,
@@ -38,6 +45,8 @@ export const blogService = async (
     if (options?.revalidate) {
       config.next = { revalidate: options.revalidate };
     }
+
+    config.next = { ...config.next, tags: ["blogPosts"] };
 
     const res = await fetch(url.toString(), config);
     const data = await res.json();

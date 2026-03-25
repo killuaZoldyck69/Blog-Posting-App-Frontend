@@ -1,0 +1,35 @@
+import HistoryTable from "@/components/modules/user/history/HistoryTable";
+import PaginationControls from "@/components/ui/pagination-controls";
+import { blogService } from "@/services/blog.service";
+
+export default async function HistoryPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page: string }>;
+}) {
+  const { page } = await searchParams;
+
+  //   console.log(page);
+
+  const response = await blogService({
+    page,
+  });
+
+  const posts = response.data.data || [];
+  console.log(response.data.meta);
+  const pagination = response.data?.meta || {
+    limit: 10,
+    page: 1,
+    totalData: 0,
+    totalPages: 1,
+  };
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-6">Blog Post History</h1>
+      <HistoryTable posts={posts} />
+
+      <PaginationControls meta={pagination} />
+    </div>
+  );
+}

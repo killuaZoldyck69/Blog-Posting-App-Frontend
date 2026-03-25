@@ -1,4 +1,4 @@
-import { CreateBlogFormClient } from "@/components/modules/user/CreateBlogFormClient";
+import { CreateBlogFormClient } from "@/components/modules/user/createBlog/CreateBlogFormClient";
 import { blogService } from "@/services/blog.service";
 import { BlogPost } from "@/types";
 
